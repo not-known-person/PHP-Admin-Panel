@@ -1,6 +1,6 @@
 <?php
-define("ROOT_DIR", "http://localhost/forum/forum/")
-	?>
+// define("ROOT_DIR", "http://localhost/forum/forum/")
+?>
 <div class="col-md-4">
 	<div class="sidebar">
 		<div class="block">

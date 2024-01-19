@@ -1,26 +1,28 @@
-<?php require "../includes/header.php"; ?>
-<?php require "../config/config.php"; ?>
 <?php
-if (isset($_SESSION["username"])) {
-  header("location :" . ROOT_DIR . "");
-}
-
+require "../config/config.php";
+require "../includes/header.php";
+// if (isset($_SESSION["username"])) {
+//   // header("location :" . ROOT_DIR . "");
+//   // echo $_SESSION['username'];
+// }
 if (isset($_POST['submit'])) {
   if ((empty($_POST['email'])) or (empty($_POST['password']))) {
     echo "<script>alert('Fill all the required fields')</script>";
   } else {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    $query = $conn->query("SELECT * FROM users WHERE email='$email'");
-    $query->execute();
-
-    $fetch = $query->fetch(PDO::FETCH_ASSOC);
-
-    if ($login->rowCount() > 0) {
+    try {
+      $query = $conn->prepare("SELECT * FROM users WHERE email=:email");
+      $query->execute([
+        ":email" => $email,
+      ]);
+      $fetch = $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $Exception) {
+      echo $Exception->getMessage();
+    }
+    if ($query->rowCount() > 0) {
       if (password_verify($password, $fetch["password"])) {
-        echo "<script>alert(LOGGED IN')</script>";
-        $_SESSION['username'] = $fetch['username'];
+        $_SESSION['username'] = $fetch['name'];
         $_SESSION['email'] = $fetch['email'];
         $_SESSION['avatar'] = $fetch['avatar'];
 
@@ -29,10 +31,6 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-
-
-
-
 ?>
 <div class="container">
   <div class="row">
@@ -55,7 +53,7 @@ if (isset($_POST['submit'])) {
                 placeholder="Enter A Password">
             </div>
 
-            <input name="Login" type="submit" class="color btn btn-default" value="Login" />
+            <input name="submit" type="submit" class="color btn btn-default" value="Login" />
           </form>
         </div>
       </div>

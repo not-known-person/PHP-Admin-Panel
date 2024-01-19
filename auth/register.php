@@ -1,16 +1,13 @@
 <?php require "../includes/header.php"; ?>
 <?php require "../config/config.php"; ?>
 <?php
-
 if (isset($_SESSION["username"])) {
 	header("location :" . ROOT_DIR . "");
 }
 if (isset($_POST['submit'])) {
 	if (empty($_POST['name']) or (empty($_POST['email'])) or (empty($_POST['username'])) or (empty($_POST['password'])) or (empty($_POST['about']))) {
-		echo "<script>alert('fill all the required fields')</script>";
+		echo "<script>alert('Fill all the required fields')</script>";
 	} else {
-		echo "WORKING";
-		echo "<script>alert('fill all the required fields')</script>";
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$username = $_POST['username'];
@@ -74,7 +71,7 @@ if (isset($_POST['submit'])) {
 							<textarea id="about" rows="6" cols="80" class="form-control" name="about"
 								placeholder="Tell us about yourself (Optional)"></textarea>
 						</div>
-						<input name="register" type="submit" class="color btn btn-default" value="Register" />
+						<input name="submit" type="submit" class="color btn btn-default" value="Register" />
 					</form>
 				</div>
 			</div>

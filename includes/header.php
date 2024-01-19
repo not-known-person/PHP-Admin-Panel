@@ -1,6 +1,7 @@
 <?php
-define("ROOT_DIR", "http://localhost/forum/forum/")
-  ?>
+define("ROOT_DIR", "http://localhost/forum/forum/");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
