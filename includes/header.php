@@ -34,7 +34,7 @@ session_start();
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="index.html">Home</a></li>
           <?php if (isset($_SESSION['username'])): ?>
-            <li><a href="create.html">Create Topic</a></li>
+            <li><a href="<?php echo ROOT_DIR; ?>topics/create.php">Create Topic</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false">

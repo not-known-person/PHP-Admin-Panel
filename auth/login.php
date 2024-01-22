@@ -1,10 +1,9 @@
 <?php
 require "../config/config.php";
 require "../includes/header.php";
-// if (isset($_SESSION["username"])) {
-//   // header("location :" . ROOT_DIR . "");
-//   // echo $_SESSION['username'];
-// }
+if (isset($_SESSION["username"])) {
+  header("location :" . ROOT_DIR . "");
+}
 if (isset($_POST['submit'])) {
   if ((empty($_POST['email'])) or (empty($_POST['password']))) {
     echo "<script>alert('Fill all the required fields')</script>";
@@ -25,7 +24,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $fetch['name'];
         $_SESSION['email'] = $fetch['email'];
         $_SESSION['avatar'] = $fetch['avatar'];
-
+        $_SESSION['id'] = $fetch['id'];
         header('location: ' . ROOT_DIR . '');
       }
     }
